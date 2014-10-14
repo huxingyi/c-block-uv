@@ -1,0 +1,22 @@
+SRC=src/c-block-uv.c src/test.c
+OBJ=$(SRC:.c=.o)
+EXE=test.exe
+
+CC=gcc
+CFLAGS=-Wall -O3 -g -Iinclude -I../c-block -I./deps/libuv/include
+LDFLAGS=-mwindows
+LIBS=./deps/libuv/libuv.a -lws2_32 -lwsock32 -lPsapi -lIphlpapi
+RM=rm
+
+%.o: %.c
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+.PHONY : all
+all: $(EXE)
+
+$(EXE): $(OBJ)
+	$(CC) $(OBJ) $(LDFLAGS) $(LIBS) -o $@
+
+.PHONY : clean
+clean:
+	-$(RM) $(OBJ) core
