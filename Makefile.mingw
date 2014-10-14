@@ -3,7 +3,7 @@ OBJ=$(SRC:.c=.o)
 EXE=test.exe
 
 CC=gcc
-CFLAGS=-Wall -O3 -g -Iinclude -I../c-block -I./deps/libuv/include
+CFLAGS=-Wall -O3 -g -Iinclude -I./deps/c-block -I./deps/libuv/include
 LDFLAGS=-mwindows
 LIBS=./deps/libuv/libuv.a -lws2_32 -lwsock32 -lPsapi -lIphlpapi
 RM=rm

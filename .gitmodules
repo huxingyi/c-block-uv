@@ -1,3 +1,6 @@
 [submodule "deps/libuv"]
 	path = deps/libuv
 	url = https://github.com/joyent/libuv.git
+[submodule "deps/c-block"]
+	path = deps/c-block
+	url = https://github.com/huxingyi/c-block

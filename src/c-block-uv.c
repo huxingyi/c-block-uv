@@ -17,7 +17,7 @@
 
 static void c_fs_stat_after(uv_fs_t* req) {
   c_fs_stat_t *ctx = (c_fs_stat_t *)req->data;
-  return c_finished(ctx);
+  c_finished(ctx);
 }
 
 int c_fs_stat(c_fs_stat_t *ctx) {
