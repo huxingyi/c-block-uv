@@ -20,9 +20,9 @@
 #include "uv.h"
 
 #define C_BLOCK_UV_COMMON_FIELDS \
-  struct c_block block;          \
   uv_loop_t *loop;               \
   void *data;                    \
+  struct c_block block;          \
   int status
 
 typedef struct _c_fs_stat {
@@ -31,27 +31,5 @@ typedef struct _c_fs_stat {
   const char *path;
 } c_fs_stat_t;
 int c_fs_stat(c_fs_stat_t *ctx);
-
-typedef struct _c_shutdown {
-  C_BLOCK_UV_COMMON_FIELDS;
-  uv_shutdown_t req;
-  uv_stream_t *handle;
-} c_shutdown_t;
-int c_shutdown(c_shutdown_t *ctx);
-
-typedef struct _c_close {
-  C_BLOCK_UV_COMMON_FIELDS;
-  void *old_data;
-  uv_handle_t *handle;
-} c_close_t;
-int c_close(c_close_t *ctx);
-
-typedef struct _c_listen {
-  C_BLOCK_UV_COMMON_FIELDS;
-  void *old_data;
-  uv_stream_t *stream;
-  int backlog;
-} c_listen_t;
-int c_listen(c_listen_t *ctx);
 
 #endif

@@ -19,4 +19,4 @@ $(EXE): $(OBJ)
 
 .PHONY : clean
 clean:
-	-$(RM) $(OBJ) core
+	-$(RM) $(OBJ)

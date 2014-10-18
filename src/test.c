@@ -35,7 +35,7 @@ int task_clousre(struct task *ctx) {
   
   ctx->u.stat.loop = uv_default_loop();
   ctx->u.stat.path = "./test.exe";
-  c_call(&ctx->u.stat, c_fs_stat);
+  c_await(&ctx->u.stat, c_fs_stat);
   
   printf("stat result:%d\n", ctx->u.stat.req.result);
   
@@ -45,16 +45,18 @@ int task_clousre(struct task *ctx) {
   
   c_end();
   
+  return c_finished(ctx);
+}
+
+static int on_final(struct task *ctx) {
   printf("free ctx\n");
   free(ctx);
-  
   return 0;
 }
 
 void test_c_fs_stat(void) {
   struct task *ctx = (struct task *)malloc(sizeof(struct task));
-  c_init(ctx);
-  task_clousre(ctx);
+  c_spawn(ctx, task_clousre, on_final);
 }
 
 int main(int argc, char *argv[]) {
@@ -62,7 +64,7 @@ int main(int argc, char *argv[]) {
   printf("enter\n");
   
   test_c_fs_stat();
-  
+
   uv_run(uv_default_loop(), UV_RUN_DEFAULT);
   
   printf("leave\n");
